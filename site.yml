@@ -1,0 +1,15 @@
+---
+- name: Configure OpenVPN for BUSY
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update repositories
+      apt:
+          cache_valid_time: 86400
+          update_cache: yes
+
+    - name: Install OpenVPN
+      apt:
+          name: openvpn
+          state: present
