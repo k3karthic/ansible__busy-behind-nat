@@ -6,9 +6,11 @@ On certain ISPs like Jio, it is not possible to access a server over the interen
 
 You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found at [terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1).
 
-## Region
+## Configuration
 
 Modify `inventory/oracle.oci.yml` and specify the region where you have deployed your server on Oracle Cloud.
+
+Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 
 ## SSH Private Key
 
