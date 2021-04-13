@@ -17,6 +17,12 @@ You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](
 
 Copy your SSH private key for your server into the `ssh` folder as `oracle`. Alternatively, edit the `inventory/group_vars/all.yml` file and replace the value of `ansible_ssh_private_key_file` with the location of the private key.
 
+## Run
+
+```
+./bin/apply.sh
+```
+
 ## Encryption
 
 Sensitive files like the SSH private keys are encrypted before being stored in the repository.
