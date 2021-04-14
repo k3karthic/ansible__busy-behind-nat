@@ -4,6 +4,8 @@ On certain ISPs like Jio, it is not possible to access a server over the interen
 
 The Ansible playbook in this repository creates a private OpenVPN network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY](https://busy.in/) server using the "LAN" profile.
 
+**Assumption:** Basic server setup has been completed using the playbook [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
+
 ## Solution Overview
 
 The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
@@ -26,6 +28,14 @@ You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](
 Copy your SSH private key for your server into the `ssh` folder as `oracle`. Alternatively, edit the `inventory/group_vars/all.yml` file and replace the value of `ansible_ssh_private_key_file` with the location of the private key.
 
 ## Run
+
+Before running the playbook, install the following modules from Ansible Galaxy,
+
+```
+ansible-galaxy collection install community.general
+```
+
+Run the playbook using the following command,
 
 ```
 ./bin/apply.sh

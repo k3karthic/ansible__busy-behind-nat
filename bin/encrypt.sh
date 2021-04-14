@@ -18,3 +18,10 @@ FILES=$(ls ssh/oracle* | grep -v \.gpg)
 for f in $FILES; do
     encrypt $f
 done
+
+if [ -f ca.tar.gz ]; then
+    rm ca.tar.gz
+fi
+
+tar cvzf ca.tar.gz ca
+encrypt ca.tar.gz
