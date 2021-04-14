@@ -33,7 +33,7 @@ Copy your SSH private key for your server into the `ssh` folder as `oracle`. Alt
 
 ## Encryption
 
-Sensitive files like the SSH private keys are encrypted before being stored in the repository.
+Sensitive files like the SSH private keys are encrypted before being stored in the repository. The unencrypted file paths must be added to `.gitignore`.
 
 Use the following command to decrypt the files after cloning the repository,
 
