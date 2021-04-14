@@ -83,16 +83,22 @@
         owner: root
         group: root
         mode: '0644'
-      notify: Restart openvpn
 
     - name: open udp 1194
-      community.general.ufw:
-        rule: allow
-        port: "1194"
-        proto: udp
+      ansible.builtin.iptables:
+        action: insert
+        chain: INPUT
+        protocol: udp
+        destination_port: 1194
+        ctstate: NEW
+        jump: ACCEPT
+        comment: Accept new OpenVPN connections
 
-  handlers:
-    - name: Restart openvpn
-      service:
-        name: openvpn@server
-        state: restarted
+    - name: save iptables
+      ansible.builtin.shell:
+        cmd: iptables-save > /etc/iptables/rules.v4
+
+    - name: Start openvpn service
+      ansible.builtin.systemd:
+        name: openvpn-server@server
+        state: started
