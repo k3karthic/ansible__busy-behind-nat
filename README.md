@@ -24,20 +24,6 @@ Basic setup (swap, fail2ban) is assumbed to have been performed using the Ansibl
 
 One can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
-## Dynamic Inventory
-
-This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to dynamically populate public Ubuntu instances.
-
-Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
-
-## Configuration
-
-1. Modify `inventory/oracle.oci.yml`
-    1. specify the region where you have deployed your server on Oracle Cloud.
-    1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
-1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
-2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
-
 ## PKI Setup
 
 To allow the OpenVPN server and clients to securely communicate with each other we need to establish a Public Key Infrastructure (PKI). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
@@ -69,6 +55,13 @@ Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
 
 Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository.
 
+Install OpenVPN on the key signinig server and run the following command. This is only required to generate a shared secret for TLS authentication.
+```
+openvpn --genkey --secret ta.key
+```
+
+Copy `ta.key` into the `ca` folder of the current directory.
+
 ### BUSY Server
 
 Create and sign a certificate for the BUSY server,
@@ -88,6 +81,20 @@ Create and sign a certificate for the BUSY App,
 ```
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone.
+
+## Dynamic Inventory
+
+This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to dynamically populate public Ubuntu instances.
+
+Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
+
+## Configuration
+
+1. Modify `inventory/oracle.oci.yml`
+    1. specify the region where you have deployed your server on Oracle Cloud.
+    1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
+1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
+2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
 
 ## Run
 
