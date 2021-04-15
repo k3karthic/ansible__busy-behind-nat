@@ -22,17 +22,17 @@ Basic setup (swap, fail2ban) is assumbed to have been performed using the Ansibl
 
 One can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
-## PKI Setup
+## Certificate Authority Setup
 
-To allow the OpenVPN server and clients to securely communicate with each other we need to establish a Public Key Infrastructure (PKI). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
+To allow the OpenVPN server and clients to securely communicate with each other we need to create a Certificate Authority (CA). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
 
-For security, the key signinig server should be a standalone server, but the OpenVPN server can act as the key signinig server as well for smaller deployments. 
+For security, the key signing server should be a standalone server, but the OpenVPN server can act as the key signing server as well for smaller deployments. 
 
 To get started, install [easy-rsa](https://github.com/OpenVPN/easy-rsa) on the system you will be using as the key signing server.
 
 ### Key Signing Server Setup
 
-Run the following commands on the key signing server to create a new PKI and Certificate Authority (CA),
+Run the following commands on the key signing server to create a new Public Key Infrastructure (PKI) and CA.
 ```
 ./easyrsa init-pki
 ./easyrsa build-ca
@@ -53,7 +53,7 @@ Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
 
 Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository.
 
-Install OpenVPN on the key signinig server and run the following command. This is only required to generate a shared secret for TLS authentication.
+Install OpenVPN on the key signing server and run the following command. This is only required to generate a shared secret for TLS authentication.
 ```
 openvpn --genkey --secret ta.key
 ```
