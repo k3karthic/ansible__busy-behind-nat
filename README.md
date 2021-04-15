@@ -22,6 +22,12 @@ Basic setup (swap, fail2ban) is assumbed to have been performed using the Ansibl
 
 One can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
+## Dynamic Inventory
+
+This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to dynamically populate public Ubuntu instances.
+
+Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
+
 ## Certificate Authority Setup
 
 To allow the OpenVPN server and clients to securely communicate with each other we need to create a Certificate Authority (CA). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
@@ -30,7 +36,7 @@ For security, the key signing server should be a standalone server, but the Open
 
 To get started, install [easy-rsa](https://github.com/OpenVPN/easy-rsa) on the system you will be using as the key signing server.
 
-### Key Signing Server Setup
+### Initialize easy-rsa
 
 Run the following commands on the key signing server to create a new Public Key Infrastructure (PKI) and CA.
 ```
@@ -38,7 +44,7 @@ Run the following commands on the key signing server to create a new Public Key 
 ./easyrsa build-ca
 ```
 
-### OpenVPN Server Setup
+### Create files for OpenVPN server
 
 Run the following commands on the key signing server to create and sign a certificate for the OpenVPN server,
 ```
@@ -60,7 +66,7 @@ openvpn --genkey --secret ta.key
 
 Copy `ta.key` into the `ca` folder of the current directory.
 
-### BUSY Server Setup
+### Create files for BUSY server
 
 Run the following commands on the key signing server to create and sign a certificate for the BUSY server,
 ```
@@ -70,7 +76,7 @@ Run the following commands on the key signing server to create and sign a certif
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` to the BUSY server. Create a file called `BUSY.pass` with the passphrase of the BUSY private key (BUSY.key).
 
-### BUSY App
+### Create files for BUSY App
 
 Run the following commands on the key signing server to create and sign a certificate for the BUSY App,
 ```
@@ -80,13 +86,7 @@ Run the following commands on the key signing server to create and sign a certif
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Remember to enter the passphrase of the private key (BUSYMobile1.key) either during import or by editing the configuration.
 
-## Dynamic Inventory
-
-This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to dynamically populate public Ubuntu instances.
-
-Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
-
-## Configuration
+## Playbook Configuration
 
 1. Modify `inventory/oracle.oci.yml`
     1. specify the region where you have deployed your server on Oracle Cloud.
@@ -95,8 +95,9 @@ Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
 2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
 3. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network.
 
-## Run
+## Deployment
 
+Run the playbook using the following command,
 ```
 ./bin/apply.sh
 ```
