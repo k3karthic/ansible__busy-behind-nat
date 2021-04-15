@@ -93,7 +93,7 @@ Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
     1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
 2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
-3. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does'nt overlap with your local network.
+3. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network.
 
 ## Run
 
