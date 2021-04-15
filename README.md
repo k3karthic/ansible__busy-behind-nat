@@ -51,7 +51,7 @@ Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
 ./easyrs gen-dh
 ```
 
-Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository.
+Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository. Create a file called `ca/Relay.pass` with the passphrase of the Relay private key (Relay.key).
 
 Install OpenVPN on the key signing server and run the following command. This is only required to generate a shared secret for TLS authentication.
 ```
@@ -68,7 +68,7 @@ Run the following commands on the key signing server to create and sign a certif
 ./easyrsa sign-req BUSY
 ```
 
-Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` to the BUSY server.
+Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` to the BUSY server. Create a file called `BUSY.pass` with the passphrase of the BUSY private key (BUSY.key).
 
 ### BUSY App
 
@@ -78,7 +78,7 @@ Run the following commands on the key signing server to create and sign a certif
 ./easyrsa sign-req BUSYMobile1
 ```
 
-Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone.
+Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Remember to enter the passphrase of the private key (BUSYMobile1.key) either during import or by editing the configuration.
 
 ## Dynamic Inventory
 
