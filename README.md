@@ -4,8 +4,6 @@ On certain ISPs like Jio, it is not possible to access a server over the interen
 
 The Ansible playbook in this repository creates a private OpenVPN network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY](https://busy.in/) server using the "LAN" profile.
 
-**Assumption:** Basic server setup has been completed using the playbook [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
-
 ## Solution Overview
 
 The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
@@ -32,17 +30,17 @@ For security, the key signinig server should be a standalone server, but the Ope
 
 To get started, install [easy-rsa](https://github.com/OpenVPN/easy-rsa) on the system you will be using as the key signing server.
 
-### Key Signinig Server
+### Key Signing Server Setup
 
-Run the following commands to create a new PKI and Certificate Authority (CA),
+Run the following commands on the key signing server to create a new PKI and Certificate Authority (CA),
 ```
 ./easyrsa init-pki
 ./easyrsa build-ca
 ```
 
-### OpenVPN Server
+### OpenVPN Server Setup
 
-Create and sign a certificate for the OpenVPN server,
+Run the following commands on the key signing server to create and sign a certificate for the OpenVPN server,
 ```
 ./easyrsa gen-req Relay
 ./easyrsa sign-req Relay
@@ -62,9 +60,9 @@ openvpn --genkey --secret ta.key
 
 Copy `ta.key` into the `ca` folder of the current directory.
 
-### BUSY Server
+### BUSY Server Setup
 
-Create and sign a certificate for the BUSY server,
+Run the following commands on the key signing server to create and sign a certificate for the BUSY server,
 ```
 ./easyrsa gen-req BUSY
 ./easyrsa sign-req BUSY
@@ -74,7 +72,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` t
 
 ### BUSY App
 
-Create and sign a certificate for the BUSY App,
+Run the following commands on the key signing server to create and sign a certificate for the BUSY App,
 ```
 ./easyrsa gen-req BUSYMobile1
 ./easyrsa sign-req BUSYMobile1
@@ -95,6 +93,7 @@ Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
     1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
 2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
+3. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does'nt overlap with your local network.
 
 ## Run
 
@@ -108,7 +107,7 @@ The following sample configuration files are provided in the `resources` directo
 1. *BUSY.ovpn*: configuration for the BUSY server running [OpenVPN Community](https://openvpn.net/community/).
 2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY App and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US).
 
-Replace the hostname of the OpenVPN server.
+Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
 On the BUSY server, ensure the firewall allows incoming connections from the OpenVPN virtual network interface.
 
