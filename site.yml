@@ -20,3 +20,9 @@
   become: yes
   roles:
     - fail2ban
+
+- name: Configure logrotate for openvpn
+  hosts: all
+  become: yes
+  roles:
+    - logrotate

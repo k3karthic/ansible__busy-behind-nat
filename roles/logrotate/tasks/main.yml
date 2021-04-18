@@ -1,0 +1,8 @@
+---
+- name: create openvpn logrotate config
+  copy:
+    src: openvpn
+    dest: /etc/logrotate.d/openvpn
+    owner: root
+    group: root
+    mode: '0644'

@@ -1,6 +1,6 @@
 ---
 - name: create openvpn filter
-  ansible.builtin.copy:
+  copy:
     src: openvpn.filter
     dest: /etc/fail2ban/filter.d/openvpn.conf
     owner: root
@@ -9,7 +9,7 @@
   notify: Restart fail2ban
 
 - name: create openvpn jail
-  ansible.builtin.copy:
+  copy:
     src: openvpn.jail
     dest: /etc/fail2ban/jail.d/openvpn.conf
     owner: root

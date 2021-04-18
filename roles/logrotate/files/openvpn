@@ -1,0 +1,11 @@
+/var/log/openvpn/openvpn.log {
+   
+    weekly
+    rotate 4
+    compress
+
+    delaycompress
+    missingok
+
+    create 644 root root
+}
