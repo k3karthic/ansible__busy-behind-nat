@@ -1,5 +1,5 @@
 ---
-- name: Configure OpenVPN for BUSY
+- name: Update APT
   hosts: all
   become: yes
 
@@ -9,96 +9,14 @@
           cache_valid_time: 86400
           update_cache: yes
 
-    - name: Install OpenVPN
-      apt:
-          name: openvpn
-          state: present
+- name: Install & configure openvpn
+  hosts: all
+  become: yes
+  roles:
+    - openvpn
 
-    - name: Enable openvpn service
-      ansible.builtin.systemd:
-        name: openvpn-server@server
-        state: stopped
-        enabled: true
-
-    - name: copy ca.crt
-      ansible.builtin.copy:
-        src: ca/ca.crt
-        dest: /etc/openvpn/server/ca.crt
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: copy dh.pem
-      ansible.builtin.copy:
-        src: ca/dh.pem
-        dest: /etc/openvpn/server/dh2048.pem
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: copy Relay.crt
-      ansible.builtin.copy:
-        src: ca/Relay.crt
-        dest: /etc/openvpn/server/Relay.crt
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: copy Relay.key
-      ansible.builtin.copy:
-        src: ca/Relay.key
-        dest: /etc/openvpn/server/Relay.key
-        owner: root
-        group: root
-        mode: '0600'
-
-    - name: copy Relay.pass
-      ansible.builtin.copy:
-        src: ca/Relay.pass
-        dest: /etc/openvpn/server/Relay.pass
-        owner: root
-        group: root
-        mode: '0600'
-
-    - name: copy ta.key
-      ansible.builtin.copy:
-        src: ca/ta.key
-        dest: /etc/openvpn/server/ta.key
-        owner: root
-        group: root
-        mode: '0600'
-
-    - name: copy client configuration
-      ansible.builtin.copy:
-        src: resources/ccd
-        dest: /etc/openvpn/server/
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: copy server configuration
-      ansible.builtin.copy:
-        src: resources/server.conf
-        dest: /etc/openvpn/server/server.conf
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: open udp 1194
-      ansible.builtin.iptables:
-        action: insert
-        chain: INPUT
-        protocol: udp
-        destination_port: 1194
-        ctstate: NEW
-        jump: ACCEPT
-        comment: Accept new OpenVPN connections
-
-    - name: save iptables
-      ansible.builtin.shell:
-        cmd: iptables-save > /etc/iptables/rules.v4
-
-    - name: Start openvpn service
-      ansible.builtin.systemd:
-        name: openvpn-server@server
-        state: started
+- name: Configure fail2ban for openvpn
+  hosts: all
+  become: yes
+  roles:
+    - fail2ban

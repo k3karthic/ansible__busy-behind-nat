@@ -1,0 +1,12 @@
+# Reference - https://www.fail2ban.org/wiki/index.php/HOWTO_fail2ban_with_OpenVPN
+
+[Definition]
+
+failregex = ^ TLS Error: incoming packet authentication failed from \[AF_INET\]<HOST>:\d+$
+            ^ TLS Error: cannot locate HMAC in incoming packet from \[AF_INET\]<HOST>:\d+$
+            ^ <HOST>:\d+ Connection reset, restarting
+            ^ <HOST>:\d+ TLS Auth Error
+            ^ <HOST>:\d+ TLS Error: TLS handshake failed$
+            ^ <HOST>:\d+ VERIFY ERROR
+
+ignoreregex = 
