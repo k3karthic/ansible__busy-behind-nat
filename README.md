@@ -1,6 +1,6 @@
 # Ansible - Access BUSY behind NAT
 
-On certain ISPs like Jio, it is not possible to access a server over the interenet as the ISP does not provide a public IPv4 address. This means that it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
+On certain ISPs like Jio, it is impossible to access a server over the internet as the ISP does not provide a public IPv4 address. This means that it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
 The Ansible playbook in this repository creates a private OpenVPN network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY](https://busy.in/) server using the "LAN" profile.
 
@@ -18,21 +18,21 @@ Configuration of BUSY application,
 
 You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found at [terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1).
 
-Basic setup (swap, fail2ban) is assumbed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
+Basic setup (swap, fail2ban) is assumed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
 
 One can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
 ## Dynamic Inventory
 
-This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to dynamically populate public Ubuntu instances.
+This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to populate public Ubuntu instances dynamically.
 
-Public instances with are assumed to have a freeform tag `openvpn_service: yes`.
+Public instances are assumed to have a freeform tag `openvpn_service: yes`.
 
 ## Certificate Authority Setup
 
-To allow the OpenVPN server and clients to securely communicate with each other we need to create a Certificate Authority (CA). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
+To allow the OpenVPN server and clients to communicate securely, we need to create a Certificate Authority (CA). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
 
-For security, the key signing server should be a standalone server, but the OpenVPN server can act as the key signing server as well for smaller deployments. 
+For security, the key signing server should be a standalone server, but the OpenVPN server can act as the key signing server for smaller deployments. 
 
 To get started, install [easy-rsa](https://github.com/OpenVPN/easy-rsa) on the system you will be using as the key signing server.
 
@@ -116,7 +116,7 @@ On the BUSY server, ensure the firewall allows incoming connections from the Ope
 
 Sensitive files like the SSH private keys are encrypted before being stored in the repository.
 
-The unencrypted file paths must be added to `.gitignore`.
+You must add the unencrypted file paths to `.gitignore`.
 
 Use the following command to decrypt the files after cloning the repository,
 
