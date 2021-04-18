@@ -2,11 +2,11 @@
 
 On certain ISPs like Jio, it is impossible to access a server over the internet as the ISP does not provide a public IPv4 address. This means that it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
-The Ansible playbook in this repository creates a private OpenVPN network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY](https://busy.in/) server using the "LAN" profile.
+The Ansible playbook in this repository creates a private OpenVPN network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY server](https://busy.in/) using the "LAN" profile.
 
 ## Solution Overview
 
-The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
+The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY mobile app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
 
 ![Architecture Diagram](https://github.com/k3karthic/ansible__busy-behind-nat/raw/main/resources/solution_overview.png)
 
@@ -20,7 +20,7 @@ You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](
 
 Basic setup (swap, fail2ban) is assumed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
 
-One can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
+You can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
 ## Dynamic Inventory
 
@@ -106,7 +106,7 @@ Run the playbook using the following command,
 
 The following sample configuration files are provided in the `resources` directory,
 1. *BUSY.ovpn*: configuration for the BUSY server running [OpenVPN Community](https://openvpn.net/community/).
-2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY App and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US).
+2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY mobile app and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US).
 
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
