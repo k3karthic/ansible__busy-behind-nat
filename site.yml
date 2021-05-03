@@ -1,27 +1,27 @@
 ---
-- name: Update APT
+- name: update apt
   hosts: all
   become: yes
 
   tasks:
-    - name: Update repositories
-      apt:
+    - name: update repositories
+      ansible.builtin.apt:
           cache_valid_time: 86400
           update_cache: yes
 
-- name: Install & configure openvpn
+- name: install & configure openvpn
   hosts: all
   become: yes
   roles:
     - openvpn
 
-- name: Configure fail2ban for openvpn
+- name: configure fail2ban for openvpn
   hosts: all
   become: yes
   roles:
     - fail2ban
 
-- name: Configure logrotate for openvpn
+- name: configure logrotate for openvpn
   hosts: all
   become: yes
   roles:

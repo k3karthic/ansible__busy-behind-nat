@@ -18,7 +18,7 @@ Configuration of BUSY application,
 
 You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found at [terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1).
 
-Basic setup (swap, fail2ban) is assumed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
+Basic setup (e.g. swap, fail2ban) is assumed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
 
 You can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
@@ -92,8 +92,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSY
     1. specify the region where you have deployed your server on Oracle Cloud.
     1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
-2. Set username and password for YDNS in `inventory/group_vars/ydns.yml` using the sample `inventory/group_vars/ydns.yml.sample`.
-3. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network.
+1. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network.
 
 ## Deployment
 

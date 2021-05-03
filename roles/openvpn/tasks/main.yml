@@ -1,17 +1,17 @@
 ---
-- name: Install OpenVPN
-  apt:
+- name: install openvpn
+  ansible.builtin.apt:
       name: openvpn
       state: present
 
-- name: Enable openvpn service
-  systemd:
+- name: enable openvpn service
+  ansible.builtin.systemd:
     name: openvpn-server@server
     state: stopped
     enabled: true
 
 - name: copy ca.crt
-  copy:
+  ansible.builtin.copy:
     src: ca/ca.crt
     dest: /etc/openvpn/server/ca.crt
     owner: root
@@ -19,31 +19,31 @@
     mode: '0644'
 
 - name: copy dh.pem
-  copy:
+  ansible.builtin.copy:
     src: ca/dh.pem
     dest: /etc/openvpn/server/dh2048.pem
     owner: root
     group: root
     mode: '0644'
 
-- name: copy Relay.crt
-  copy:
+- name: copy relay.crt
+  ansible.builtin.copy:
     src: ca/Relay.crt
     dest: /etc/openvpn/server/Relay.crt
     owner: root
     group: root
     mode: '0644'
 
-- name: copy Relay.key
-  copy:
+- name: copy relay.key
+  ansible.builtin.copy:
     src: ca/Relay.key
     dest: /etc/openvpn/server/Relay.key
     owner: root
     group: root
     mode: '0600'
 
-- name: copy Relay.pass
-  copy:
+- name: copy relay.pass
+  ansible.builtin.copy:
     src: ca/Relay.pass
     dest: /etc/openvpn/server/Relay.pass
     owner: root
@@ -51,7 +51,7 @@
     mode: '0600'
 
 - name: copy ta.key
-  copy:
+  ansible.builtin.copy:
     src: ca/ta.key
     dest: /etc/openvpn/server/ta.key
     owner: root
@@ -59,7 +59,7 @@
     mode: '0600'
 
 - name: copy client configuration
-  copy:
+  ansible.builtin.copy:
     src: resources/ccd
     dest: /etc/openvpn/server/
     owner: root
@@ -67,7 +67,7 @@
     mode: '0644'
 
 - name: copy server configuration
-  copy:
+  ansible.builtin.copy:
     src: server.conf
     dest: /etc/openvpn/server/server.conf
     owner: root
@@ -75,7 +75,7 @@
     mode: '0644'
 
 - name: open udp 1194
-  iptables:
+  ansible.builtin.iptables:
     action: insert
     chain: INPUT
     protocol: udp
@@ -85,11 +85,11 @@
     comment: Accept new OpenVPN connections
 
 - name: save iptables
-  shell:
+  ansible.builtin.shell:
     cmd: iptables-save > /etc/iptables/rules.v4
 
 - name: create log directory
-  file:
+  ansible.builtin.file:
     path: /var/log/openvpn
     state: directory
     owner: root
@@ -97,14 +97,14 @@
     mode: 0755
 
 - name: create log file
-  file:
+  ansible.builtin.file:
     path: /var/log/openvpn/openvpn.log
     state: touch
     owner: root
     group: root
     mode: 0644
 
-- name: Start openvpn service
-  systemd:
+- name: start openvpn service
+  ansible.builtin.systemd:
     name: openvpn-server@server
     state: started
