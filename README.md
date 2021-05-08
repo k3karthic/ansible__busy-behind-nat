@@ -22,7 +22,14 @@ Basic setup (e.g. swap, fail2ban) is assumed to have been performed using the An
 
 You can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
 
-## Dynamic Inventory
+### Requirements
+
+Install the following Ansible modules before running the playbook,
+```
+ansible-galaxy collection install oracle.oci
+```
+
+### Dynamic Inventory
 
 This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to populate public Ubuntu instances dynamically.
 

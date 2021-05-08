@@ -1,14 +1,7 @@
 plugin: oracle.oci.oci
 
-# Force API Key authentication
-# Ansible Inventory does not support Cloud Shell: https://github.com/oracle/oci-ansible-collection/issues/61
-instance_principal_authentication: False
-
 regions:
     - ap-hyderabad-1
-
-config_file: /home/k3_karthic/.oci/ai_config
-config_profile: DEFAULT
 
 enable_parallel_processing: yes
 
