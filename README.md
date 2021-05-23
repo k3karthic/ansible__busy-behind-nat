@@ -57,7 +57,7 @@ Run the following commands on the key signing server to create a new Public Key 
 Run the following commands on the key signing server to create and sign a certificate for the OpenVPN server,
 ```
 ./easyrsa gen-req Relay
-./easyrsa sign-req Relay
+./easyrsa sign-req server Relay
 ```
 
 Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
@@ -79,7 +79,7 @@ Copy `ta.key` into the `ca` folder of the current directory.
 Run the following commands on the key signing server to create and sign a certificate for the BUSY server,
 ```
 ./easyrsa gen-req BUSY
-./easyrsa sign-req BUSY
+./easyrsa sign-req client BUSY
 ```
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` to the BUSY server. Create a file called `BUSY.pass` with the passphrase of the BUSY private key (BUSY.key).
@@ -89,7 +89,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` t
 Run the following commands on the key signing server to create and sign a certificate for the BUSY App,
 ```
 ./easyrsa gen-req BUSYMobile1
-./easyrsa sign-req BUSYMobile1
+./easyrsa sign-req client BUSYMobile1
 ```
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Remember to enter the passphrase of the private key (BUSYMobile1.key) either during import or by editing the configuration.
