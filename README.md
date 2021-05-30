@@ -96,7 +96,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSY
 
 ## Playbook Configuration
 
-1. Modify `inventory/oracle.oci.yml`
+1. Modify `inventory/oracle.oci.yml`,
     1. specify the region where you have deployed your server on Oracle Cloud.
     1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
