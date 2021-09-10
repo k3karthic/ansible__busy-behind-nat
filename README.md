@@ -8,11 +8,11 @@ The Ansible playbook in this repository creates a private [OpenVPN](https://open
 
 The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY mobile app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
 
-![Architecture Diagram](https://github.com/k3karthic/ansible__busy-behind-nat/raw/main/resources/solution_overview.png)
+![Architecture Diagram](resources/solution_overview.png)
 
 Configuration of BUSY application,
 
-![BUSY App Configuration](https://github.com/k3karthic/ansible__busy-behind-nat/raw/main/resources/mobile_config.jpeg)
+![BUSY App Configuration](resources/mobile_config.jpeg)
 
 ## Deploy for Free
 
