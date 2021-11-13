@@ -8,8 +8,6 @@ The Ansible playbook in this repository creates a private [OpenVPN](https://open
 
 ![Architecture Diagram](resources/solution_overview.png)
 
-Configuration of BUSY application,
-
 ![BUSY App Configuration](resources/mobile_config.jpeg)
 
 ## Deploy for Free
