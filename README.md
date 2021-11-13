@@ -1,12 +1,10 @@
 # Ansible - Access BUSY behind NAT
 
-On certain ISPs like Jio, it is impossible to access a server over the internet as the ISP does not allow incoming connections on the dynamically assigned IPv4 address. This means that it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
-
-The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network which will allow the [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) to connect to the [BUSY server](https://busy.in/) using the "LAN" profile.
+On certain ISPs like [Jio](https://www.jio.com/), it is not possible to access a server over the internet. This can happen if the ISP does not allow incoming connections on the dynamic IP address. As a result, it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
 ## Solution Overview
 
-The Ansible playbook in this repository creates a private OpenVPN network between a phone and the server. To access the server over the internet, configure the BUSY mobile app to connect to the server using the "LAN" profile and provide the server's IP address on the virtual network.
+The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://busy.in/) over the virtual network using the "LAN" profile.
 
 ![Architecture Diagram](resources/solution_overview.png)
 
@@ -16,21 +14,27 @@ Configuration of BUSY application,
 
 ## Deploy for Free
 
-You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found at [terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1).
+You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found below,
+* GitHub: [github.com/k3karthic/terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1)
+* Codeberg: [codeberg.org/k3karthic/terraform__oci-instance-1](https://codeberg.org/k3karthic/terraform__oci-instance-1)
 
-Basic setup (e.g. swap, fail2ban) is assumed to have been performed using the Ansible playbook at [https://github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic).
+The following Ansible playbook covers the Basic setup (e.g. swap, fail2ban),
+* GitHub: [github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic)
+* Codeberg: [codeberg.org/k3karthic/ansible__ubuntu-basic](https://codeberg.org/k3karthic/ansible__ubuntu-basic)
 
-You can configure a free static hostname for the OpenVPN server using the Ansible playbook at [https://github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns).
+You can get a free static hostname for the OpenVPN server using the Ansible playbook below,
+* GitHub: [github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns)
+* Codeberg: [codeberg.org/k3karthic/ansible__oci-ydns](https://codeberg.org/k3karthic/ansible__oci-ydns)
 
 ### Dynamic Inventory
 
-This playbook uses the Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) to populate public Ubuntu instances dynamically.
+The Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) dynamically populates public Ubuntu instances.
 
-Public instances are assumed to have a freeform tag `openvpn_service: yes`.
+All target instances must have the freeform tag `openvpn_service: yes`.
 
 ### Requirements
 
-Use the following commands to install the the Ansible plugin before running the playbook.
+Install the following Ansible modules and plugins before running the playbook.
 ```
 pip install oci
 ansible-galaxy collection install oracle.oci
@@ -38,15 +42,17 @@ ansible-galaxy collection install oracle.oci
 
 ## Certificate Authority Setup
 
-To allow the OpenVPN server and clients to communicate securely, we need to create a Certificate Authority (CA). A key signing server is used to generate and sign certificates that the OpenVPN server and client will use for authentication.
+We need to create a Certificate Authority (CA) for the OpenVPN server and clients. A key signing server generates and signs certificates used for authentication.
 
-For security, the key signing server should be a standalone server, but the OpenVPN server can act as the key signing server for smaller deployments. 
+For security, the key signing server should be a standalone server. The OpenVPN server can act as the key signing server for smaller deployments. 
 
 To get started, install [easy-rsa](https://github.com/OpenVPN/easy-rsa) on the system you will be using as the key signing server.
 
 ### Initialize easy-rsa
 
-Run the following commands on the key signing server to create a new Public Key Infrastructure (PKI) and CA.
+Run the following commands on the key signing server.
+
+Create a new Public Key Infrastructure (PKI) and CA,
 ```
 ./easyrsa init-pki
 ./easyrsa build-ca
@@ -54,7 +60,9 @@ Run the following commands on the key signing server to create a new Public Key 
 
 ### Create files for OpenVPN server
 
-Run the following commands on the key signing server to create and sign a certificate for the OpenVPN server,
+Run the following commands on the key signing server.
+
+Create and sign a certificate for the OpenVPN server,
 ```
 ./easyrsa gen-req Relay
 ./easyrsa sign-req server Relay
@@ -76,7 +84,9 @@ Copy `ta.key` into the `ca` folder of the current directory.
 
 ### Create files for BUSY server
 
-Run the following commands on the key signing server to create and sign a certificate for the BUSY server,
+Run the following commands on the key signing server. 
+
+Create and sign a certificate for the BUSY server,
 ```
 ./easyrsa gen-req BUSY
 ./easyrsa sign-req client BUSY
@@ -86,7 +96,9 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` t
 
 ### Create files for BUSY App
 
-Run the following commands on the key signing server to create and sign a certificate for the BUSY App,
+Run the following commands on the key signing server.
+
+Create and sign a certificate for the BUSY App,
 ```
 ./easyrsa gen-req BUSYMobile1
 ./easyrsa sign-req client BUSYMobile1
@@ -96,7 +108,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSY
 
 ## Playbook Configuration
 
-1. Modify `inventory/oracle.oci.yml`,
+1. Update `inventory/oracle.oci.yml`,
     1. specify the region where you have deployed your server on Oracle Cloud.
     1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
 1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
@@ -111,19 +123,17 @@ Run the playbook using the following command,
 
 ## Client Configuration
 
-The following sample configuration files are provided in the `resources` directory,
+The following sample configuration files are in the `resources` directory,
 1. *BUSY.ovpn*: configuration for the BUSY server running [OpenVPN Community](https://openvpn.net/community/).
 2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY mobile app and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US).
 
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
-On the BUSY server, ensure the firewall allows incoming connections from the OpenVPN virtual network interface.
+The BUSY server firewall should allow connections from the OpenVPN virtual network interface.
 
 ## Encryption
 
-Sensitive files like the SSH private keys are encrypted before being stored in the repository.
-
-You must add the unencrypted file paths to `.gitignore`.
+Encrypt sensitive files (SSH private keys) before saving them. `.gitignore` must contain the unencrypted file paths.
 
 Use the following command to decrypt the files after cloning the repository,
 
