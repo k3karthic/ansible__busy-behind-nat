@@ -14,6 +14,11 @@ Configuration of BUSY application,
 
 ![BUSY App Configuration](resources/mobile_config.jpeg)
 
+## Code Mirrors
+
+* GitHub: [github.com/k3karthic/ansible__freebsd-basic](https://github.com/k3karthic/ansible__freebsd-basic)
+* Codeberg: [codeberg.org/k3karthic/ansible__freebsd-basic](https://codeberg.org/k3karthic/ansible__freebsd-basic)
+
 ## Deploy for Free
 
 You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found at [terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1).
