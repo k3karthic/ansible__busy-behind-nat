@@ -32,11 +32,6 @@ You can get a free static hostname for the OpenVPN server using the Ansible play
     * GitHub: [github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns)
     * Codeberg: [codeberg.org/k3karthic/ansible__oci-ydns](https://codeberg.org/k3karthic/ansible__oci-ydns)
 
-## Code Mirrors
-
-* GitHub: [github.com/k3karthic/ansible__busy-behind-nat](https://github.com/k3karthic/ansible__busy-behind-nat/)
-* Codeberg: [codeberg.org/k3karthic/ansible__busy-behind-nat](https://codeberg.org/k3karthic/ansible__busy-behind-nat/)
-
 ## Requirements
 
 Install the following Ansible modules and plugins before running the playbook.
