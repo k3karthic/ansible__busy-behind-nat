@@ -76,7 +76,7 @@ Create and sign a certificate for the OpenVPN server,
 
 Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
 ```
-./easyrs gen-dh
+./easyrsa gen-dh
 ```
 
 Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository. Create a file called `ca/Relay.pass` with the passphrase of the Relay private key (Relay.key).
