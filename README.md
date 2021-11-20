@@ -32,13 +32,7 @@ You can get a free static hostname for the OpenVPN server using the Ansible play
 ## Code Mirrors
 
 * GitHub: [github.com/k3karthic/ansible__busy-behind-nat](https://github.com/k3karthic/ansible__busy-behind-nat/)
-* Codeberg: GitHub: [codeberg.org/k3karthic/ansible__busy-behind-nat](https://codeberg.org/k3karthic/ansible__busy-behind-nat/)
-
-## Dynamic Inventory
-
-The Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) dynamically populates public Ubuntu instances.
-
-All target instances must have the freeform tag `openvpn_service: yes`.
+* Codeberg: [codeberg.org/k3karthic/ansible__busy-behind-nat](https://codeberg.org/k3karthic/ansible__busy-behind-nat/)
 
 ## Requirements
 
@@ -47,6 +41,12 @@ Install the following Ansible modules and plugins before running the playbook.
 pip install oci
 ansible-galaxy collection install oracle.oci
 ```
+
+## Dynamic Inventory
+
+The Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) dynamically populates public Ubuntu instances.
+
+All target instances must have the freeform tag `openvpn_service: yes`.
 
 ## Certificate Authority Setup
 
