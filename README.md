@@ -34,7 +34,7 @@ You can get a free static hostname for the OpenVPN server using the Ansible play
 
 ## Requirements
 
-Install the following before running the playbook.
+Install the following before running the playbook,
 ```
 pip install oci
 ansible-galaxy collection install oracle.oci
