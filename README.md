@@ -36,8 +36,8 @@ You can get a free static hostname for the OpenVPN server using the Ansible play
 
 Install the following before running the playbook,
 ```
-pip install oci
-ansible-galaxy collection install oracle.oci
+$ pip install oci
+$ ansible-galaxy collection install oracle.oci
 ```
 
 ## Dynamic Inventory
@@ -60,8 +60,8 @@ Run the following commands on the key signing server.
 
 Create a new Public Key Infrastructure (PKI) and CA,
 ```
-./easyrsa init-pki
-./easyrsa build-ca
+$ ./easyrsa init-pki
+$ ./easyrsa build-ca
 ```
 
 ### Create files for OpenVPN server
@@ -70,20 +70,20 @@ Run the following commands on the key signing server.
 
 Create and sign a certificate for the OpenVPN server,
 ```
-./easyrsa gen-req Relay
-./easyrsa sign-req server Relay
+$ ./easyrsa gen-req Relay
+$ ./easyrsa sign-req server Relay
 ```
 
 Generate the Diffie-Hellman (DH) parameters for the OpenVPN server,
 ```
-./easyrsa gen-dh
+$ ./easyrsa gen-dh
 ```
 
 Copy `pki/ca.crt` and `pki/dh.pem` into the `ca` folder of the current repository. Create a file called `ca/Relay.pass` with the passphrase of the Relay private key (Relay.key).
 
 Install OpenVPN on the key signing server and run the following command. This is only required to generate a shared secret for TLS authentication.
 ```
-openvpn --genkey --secret ta.key
+$ openvpn --genkey --secret ta.key
 ```
 
 Copy `ta.key` into the `ca` folder of the current directory.
@@ -94,8 +94,8 @@ Run the following commands on the key signing server.
 
 Create and sign a certificate for the BUSY server,
 ```
-./easyrsa gen-req BUSY
-./easyrsa sign-req client BUSY
+$ ./easyrsa gen-req BUSY
+$ ./easyrsa sign-req client BUSY
 ```
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSY.key`, `pki/issues/BUSY.crt` to the BUSY server. Create a file called `BUSY.pass` with the passphrase of the BUSY private key (BUSY.key).
@@ -106,8 +106,8 @@ Run the following commands on the key signing server.
 
 Create and sign a certificate for the BUSY App,
 ```
-./easyrsa gen-req BUSYMobile1
-./easyrsa sign-req client BUSYMobile1
+$ ./easyrsa gen-req BUSYMobile1
+$ ./easyrsa sign-req client BUSYMobile1
 ```
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Remember to enter the passphrase of the private key (BUSYMobile1.key) either during import or by editing the configuration.
@@ -124,7 +124,7 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSY
 
 Run the playbook using the following command,
 ```
-./bin/apply.sh
+$ ./bin/apply.sh
 ```
 
 ## Client Configuration
@@ -144,11 +144,11 @@ Encrypt sensitive files (SSH private keys) before saving them. `.gitignore` must
 Use the following command to decrypt the files after cloning the repository,
 
 ```
-./bin/decrypt.sh
+$ ./bin/decrypt.sh
 ```
 
 Use the following command after running terraform to update the encrypted files,
 
 ```
-./bin/encrypt.sh <gpg key id>
+$ ./bin/encrypt.sh <gpg key id>
 ```
