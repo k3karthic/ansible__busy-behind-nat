@@ -22,7 +22,7 @@ You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](
     * GitHub: [github.com/k3karthic/terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1)
     * Codeberg: [codeberg.org/k3karthic/terraform__oci-instance-1](https://codeberg.org/k3karthic/terraform__oci-instance-1)
 
-The following Ansible playbook covers the Basic setup (e.g, swap, fail2ban),
+The following Ansible playbook covers basic setup for Ubuntu (e.g, swap, fail2ban),
 * ansible__ubuntu-basic
     * GitHub: [github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic)
     * Codeberg: [codeberg.org/k3karthic/ansible__ubuntu-basic](https://codeberg.org/k3karthic/ansible__ubuntu-basic)
@@ -42,7 +42,7 @@ $ ansible-galaxy collection install oracle.oci
 
 ## Dynamic Inventory
 
-The Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) dynamically populates public Ubuntu instances.
+The Oracle [Ansible Inventory Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/ansibleinventoryintro.htm) populates public Ubuntu instances.
 
 All target instances must have the freeform tag `openvpn_service: yes`.
 
@@ -135,7 +135,7 @@ The following sample configuration files are in the `resources` directory,
 
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
-The BUSY server firewall should allow connections from the OpenVPN virtual network interface.
+Configure the firewall to allow connections to BUSY from the OpenVPN virtual network interface.
 
 ## Encryption
 
