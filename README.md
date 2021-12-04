@@ -135,7 +135,7 @@ The following sample configuration files are in the `resources` directory,
 
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
-Configure the firewall to allow connections to BUSY from the OpenVPN virtual network interface.
+BUSY should be able to accept connections from the OpenVPN virtual network interface.
 
 ## Encryption
 
