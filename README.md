@@ -1,10 +1,10 @@
-# Ansible - Access BUSY behind NAT
+# Ansible — Access BUSY behind NAT
 
 On certain ISPs like [Jio](https://www.jio.com/), it is not possible to access a server over the internet. This can happen if the ISP does not allow incoming connections on the dynamic IP address. As a result, it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
 ## Solution Overview
 
-The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://busy.in/) over the virtual network using the "LAN" profile.
+The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://busy.in/) over the virtual network using the “LAN” profile.
 
 ![Architecture Diagram](resources/solution_overview.png)
 
@@ -17,12 +17,12 @@ The Ansible playbook in this repository creates a private [OpenVPN](https://open
 
 ## Deploy for Free
 
-You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying a server can be found below,
+You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying the server is below,
 * terraform__oci-instance-1
     * GitHub: [github.com/k3karthic/terraform__oci-instance-1](https://github.com/k3karthic/terraform__oci-instance-1)
     * Codeberg: [codeberg.org/k3karthic/terraform__oci-instance-1](https://codeberg.org/k3karthic/terraform__oci-instance-1)
 
-The following Ansible playbook covers the Basic setup (e.g. swap, fail2ban),
+The following Ansible playbook covers the Basic setup (e.g, swap, fail2ban),
 * ansible__ubuntu-basic
     * GitHub: [github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic)
     * Codeberg: [codeberg.org/k3karthic/ansible__ubuntu-basic](https://codeberg.org/k3karthic/ansible__ubuntu-basic)
@@ -110,7 +110,7 @@ $ ./easyrsa gen-req BUSYMobile1
 $ ./easyrsa sign-req client BUSYMobile1
 ```
 
-Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Remember to enter the passphrase of the private key (BUSYMobile1.key) either during import or by editing the configuration.
+Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Enter the passphrase of the private key during import or in the configuration.
 
 ## Playbook Configuration
 
