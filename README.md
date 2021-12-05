@@ -2,20 +2,9 @@
 
 On certain ISPs like [Jio](https://www.jio.com/), it is not possible to access a server over the internet. This can happen if the ISP does not allow incoming connections on the dynamic IP address. As a result, it is not possible to access [BUSY](https://www.busywinsoftware.com/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
-## Solution Overview
-
 The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://www.busywinsoftware.com/) over the virtual network using the “LAN” profile.
 
 ![Architecture Diagram](resources/solution_overview.png)
-
-![BUSY App Configuration](resources/mobile_config.jpeg)
-
-## Code Mirrors
-
-* GitHub: [github.com/k3karthic/ansible__freebsd-basic](https://github.com/k3karthic/ansible__freebsd-basic)
-* Codeberg: [codeberg.org/k3karthic/ansible__freebsd-basic](https://codeberg.org/k3karthic/ansible__freebsd-basic)
-
-## Deploy for Free
 
 You can run the OpenVPN server for free by using the [Oracle Cloud Always Free](https://www.oracle.com/cloud/free/#always-free) tier. Terraform script for deploying the server is below,
 * terraform__oci-instance-1
@@ -27,10 +16,15 @@ The following Ansible playbook covers basic setup for Ubuntu (e.g, swap, fail2ba
     * GitHub: [github.com/k3karthic/ansible__ubuntu-basic](https://github.com/k3karthic/ansible__ubuntu-basic)
     * Codeberg: [codeberg.org/k3karthic/ansible__ubuntu-basic](https://codeberg.org/k3karthic/ansible__ubuntu-basic)
 
-You can get a free static hostname for the OpenVPN server using the Ansible playbook below,
+You can get a free hostname for the OpenVPN server using the Ansible playbook below,
 * ansible__oci-ydns
     * GitHub: [github.com/k3karthic/ansible__oci-ydns](https://github.com/k3karthic/ansible__oci-ydns)
     * Codeberg: [codeberg.org/k3karthic/ansible__oci-ydns](https://codeberg.org/k3karthic/ansible__oci-ydns)
+
+## Code Mirrors
+
+* GitHub: [github.com/k3karthic/ansible__freebsd-basic](https://github.com/k3karthic/ansible__freebsd-basic)
+* Codeberg: [codeberg.org/k3karthic/ansible__freebsd-basic](https://codeberg.org/k3karthic/ansible__freebsd-basic)
 
 ## Requirements
 
@@ -136,6 +130,8 @@ The following sample configuration files are in the `resources` directory,
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
 BUSY should be able to accept connections from the OpenVPN virtual network interface.
+
+![BUSY App Configuration](resources/mobile_config.jpeg)
 
 ## Encryption
 
