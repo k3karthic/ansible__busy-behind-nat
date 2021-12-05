@@ -130,8 +130,8 @@ $ ./bin/apply.sh
 ## Client Configuration
 
 The following sample configuration files are in the `resources` directory,
-1. *BUSY.ovpn*: configuration for the BUSY server running [OpenVPN Community](https://openvpn.net/community/).
-2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY mobile app and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US).
+1. *BUSY.ovpn*: configuration for the BUSY server running [OpenVPN Community](https://openvpn.net/community/)
+2. *BUSYMobile1.ovpn*: configuration for the phone running BUSY mobile app and [OpenVPN](https://play.google.com/store/apps/details?id=de.blinkt.openvpn&hl=en&gl=US)
 
 Replace the hostname of the OpenVPN server. Change the virtual IP (172.23.0.X) if required.
 
