@@ -115,10 +115,10 @@ Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSY
 ## Playbook Configuration
 
 1. Update `inventory/oracle.oci.yml`,
-    1. specify the region where you have deployed your server on Oracle Cloud.
-    1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File).
-1. Set username and ssh authentication in `inventory/group_vars/all.yml`.
-1. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network.
+    1. Specify the region where you have deployed your server on Oracle Cloud
+    1. Configure the authentication as per the [Oracle Guide](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm#SDK_and_CLI_Configuration_File)
+1. Set username and ssh authentication in `inventory/group_vars/all.yml`
+1. Change the CIDR of the virtual network (172.23.0.0/16) to ensure it does not overlap with your local network
 
 ## Deployment
 
