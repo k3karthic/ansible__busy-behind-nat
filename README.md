@@ -1,10 +1,10 @@
 # Ansible — Access BUSY behind NAT
 
-On certain ISPs like [Jio](https://www.jio.com/), it is not possible to access a server over the internet. This can happen if the ISP does not allow incoming connections on the dynamic IP address. As a result, it is not possible to access [BUSY](https://busy.in/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
+On certain ISPs like [Jio](https://www.jio.com/), it is not possible to access a server over the internet. This can happen if the ISP does not allow incoming connections on the dynamic IP address. As a result, it is not possible to access [BUSY](https://www.busywinsoftware.com/) using the provided [Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/).
 
 ## Solution Overview
 
-The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://busy.in/) over the virtual network using the “LAN” profile.
+The Ansible playbook in this repository creates a private [OpenVPN](https://openvpn.net/) network. The [BUSY Mobile App](https://www.busywinsoftware.com/products/busy-mobile-app/) can then connect to the [BUSY server](https://www.busywinsoftware.com/) over the virtual network using the “LAN” profile.
 
 ![Architecture Diagram](resources/solution_overview.png)
 
