@@ -106,7 +106,7 @@ $ ./easyrsa sign-req client BUSYMobile1
 
 Copy `pki/ca.crt`, `pki/ta.key`, `pki/private/BUSYMobile1.key`, `pki/issues/BUSYMobile1.crt` to the phone. Enter the passphrase of the private key during import or in the configuration.
 
-## Playbook Configuration
+## Configuration
 
 1. Update `inventory/oracle.oci.yml`,
     1. Specify the region where you have deployed your server on Oracle Cloud
