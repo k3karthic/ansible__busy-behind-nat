@@ -23,8 +23,8 @@ You can get a free hostname for the OpenVPN server using the Ansible playbook be
 
 ## Code Mirrors
 
-* GitHub: [github.com/k3karthic/ansible__freebsd-basic](https://github.com/k3karthic/ansible__freebsd-basic)
-* Codeberg: [codeberg.org/k3karthic/ansible__freebsd-basic](https://codeberg.org/k3karthic/ansible__freebsd-basic)
+* GitHub: [github.com/k3karthic/ansible__busy-behind-nat](https://github.com/k3karthic/ansible__busy-behind-nat)
+* Codeberg: [codeberg.org/k3karthic/ansible__busy-behind-nat](https://codeberg.org/k3karthic/ansible__busy-behind-nat)
 
 ## Requirements
 
