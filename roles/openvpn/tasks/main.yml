@@ -86,7 +86,7 @@
 
 - name: save iptables
   ansible.builtin.shell:
-    cmd: iptables-save > /etc/iptables/rules.v4
+    cmd: iptables-save | grep -v f2b- > /etc/iptables/rules.v4
 
 - name: create log directory
   ansible.builtin.file:
