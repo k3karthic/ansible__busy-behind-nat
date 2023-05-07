@@ -1,5 +1,5 @@
 ---
-- name: create openvpn logrotate config
+- name: Create openvpn logrotate config
   ansible.builtin.copy:
     src: openvpn
     dest: /etc/logrotate.d/openvpn
